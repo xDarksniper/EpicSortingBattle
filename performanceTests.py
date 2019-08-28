@@ -53,7 +53,7 @@ for run in range(1):
     runResults['Testcase 4'] = runTestCase('testcase4.txt')
     testResults[run] = runResults
 totalTimeSlut = time.time()
-print('Total tid: ', totalTimeSlut - totalTimeStart, 'sekunder')
+print('\n\nTotal tid: ', totalTimeSlut - totalTimeStart, 'sekunder')
 
 fil = open('testresults.txt', 'w')
 fil.write(json.dumps(testResults))
