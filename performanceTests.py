@@ -17,32 +17,33 @@ def runTestCase(filename):
     algo.selectSort(case)
     tSlut = time.time()
     caseResults['Select Sort'] = tSlut - tStart
-    print('Select Sort:', tSlut - tStart)
+    print('Select Sort:', tSlut - tStart, 'sekunder')
 
     print('Starter Insert Sort')
     tStart = time.time()
     algo.insertSort(case)
     tSlut = time.time()
     caseResults['Insert Sort'] = tSlut - tStart
-    print('Insert Sort:', tSlut - tStart)
+    print('Insert Sort:', tSlut - tStart, 'sekunder')
 
     print('Starter Bubble Sort')
     tStart = time.time()
     algo.bubbleSort(case)
     tSlut = time.time()
     caseResults['Bubble Sort'] = tSlut - tStart
-    print('Bubble Sort:', tSlut - tStart)
+    print('Bubble Sort:', tSlut - tStart, 'sekunder')
 
     print('Starter Timsort')
     tStart = time.time()
     case.sort()
     tSlut = time.time()
     caseResults['Timsort'] = tSlut - tStart
-    print('Timsort:', tSlut - tStart)
+    print('Timsort:', tSlut - tStart, 'sekunder')
 
     return caseResults
 
 testResults = {}
+totalTimeStart = time.time()
 for run in range(1):
     runResults = {}
     runResults['Testcase 0'] = runTestCase('testcase0.txt')
@@ -51,6 +52,8 @@ for run in range(1):
     runResults['Testcase 3'] = runTestCase('testcase3.txt')
     runResults['Testcase 4'] = runTestCase('testcase4.txt')
     testResults[run] = runResults
+totalTimeSlut = time.time()
+print('Total tid: ', totalTimeSlut - totalTimeStart, 'sekunder')
 
 fil = open('testresults.txt', 'w')
 fil.write(json.dumps(testResults))
