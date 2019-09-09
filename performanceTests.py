@@ -1,4 +1,4 @@
-import time, json, testDataGenerator, sorteringsAlgoritmer as algo
+import time, json, sys, sorteringsAlgoritmer as algo
 
 def importFile(filename):
     outList = []
@@ -33,6 +33,13 @@ def runTestCase(filename):
     caseResults['Bubble Sort'] = tSlut - tStart
     print('Bubble Sort:', tSlut - tStart, 'sekunder')
 
+    print('Starter MergeSort')
+    tStart = time.time()
+    algo.mergeSort(case)
+    tSlut = time.time()
+    caseResults['MergeSort'] = tSlut - tStart
+    print('MergeSort:', tSlut - tStart, 'sekunder')
+
     print('Starter Timsort')
     tStart = time.time()
     case.sort()
@@ -44,7 +51,7 @@ def runTestCase(filename):
 
 testResults = {}
 totalTimeStart = time.time()
-for run in range(1):
+for run in range(10):
     runResults = {}
     runResults['Testcase 0'] = runTestCase('testcase0.txt')
     runResults['Testcase 1'] = runTestCase('testcase1.txt')
