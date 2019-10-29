@@ -14,14 +14,14 @@ def runTestCase(filename):
 
     print('Starter Select Sort')
     tStart = time.time()
-    algo.selectSort(case)
+    algo.selectionSort(case)
     tSlut = time.time()
     caseResults['Select Sort'] = tSlut - tStart
     print('Select Sort:', tSlut - tStart, 'sekunder')
 
     print('Starter Insert Sort')
     tStart = time.time()
-    algo.insertSort(case)
+    algo.insertionSort(case)
     tSlut = time.time()
     caseResults['Insert Sort'] = tSlut - tStart
     print('Insert Sort:', tSlut - tStart, 'sekunder')
