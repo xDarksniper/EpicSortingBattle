@@ -1,4 +1,4 @@
-import os, random, string, pprint
+import os, random, string
 
 def makeFile(list, filename):
     if not os.path.exists('./testfiles'):
