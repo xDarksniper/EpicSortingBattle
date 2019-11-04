@@ -1,4 +1,4 @@
-import time, json, sys, sorteringsAlgoritmer as algo
+import time, json, sys, testDataGenerator, sorteringsAlgoritmer as algo
 
 def importFile(filename):
     outList = []
@@ -10,35 +10,52 @@ def importFile(filename):
 def runTestCase(filename):
     caseResults = {}
     print('\nImporterer', filename)
-    case = importFile('./testfiles/' + filename)
+    try:
+        case = importFile('./testfiles/' + filename)
+    except:
+        print('Kunne ikke finde testfiler. Prøver at generere.')
+        testDataGenerator.generate()
+        runTestCase()
 
-    print('Starter Select Sort')
-    tStart = time.time()
-    algo.selectionSort(case)
-    tSlut = time.time()
-    caseResults['Select Sort'] = tSlut - tStart
-    print('Select Sort:', tSlut - tStart, 'sekunder')
+    try:
+        print('Starter Select Sort')
+        tStart = time.time()
+        algo.selectionSort(case)
+        tSlut = time.time()
+        caseResults['Select Sort'] = tSlut - tStart
+        print('Select Sort:', tSlut - tStart, 'sekunder')
+    except:
+        print('SelectionSort ikke implementeret. Springer over.')
 
-    print('Starter Insert Sort')
-    tStart = time.time()
-    algo.insertionSort(case)
-    tSlut = time.time()
-    caseResults['Insert Sort'] = tSlut - tStart
-    print('Insert Sort:', tSlut - tStart, 'sekunder')
+    try:
+        print('Starter Insert Sort')
+        tStart = time.time()
+        algo.insertionSort(case)
+        tSlut = time.time()
+        caseResults['Insert Sort'] = tSlut - tStart
+        print('Insert Sort:', tSlut - tStart, 'sekunder')
+    except:
+        print('insertionSort ikke implementeret. Springer over.')
 
-    print('Starter Bubble Sort')
-    tStart = time.time()
-    algo.bubbleSort(case)
-    tSlut = time.time()
-    caseResults['Bubble Sort'] = tSlut - tStart
-    print('Bubble Sort:', tSlut - tStart, 'sekunder')
+    try:
+        print('Starter Bubble Sort')
+        tStart = time.time()
+        algo.bubbleSort(case)
+        tSlut = time.time()
+        caseResults['Bubble Sort'] = tSlut - tStart
+        print('Bubble Sort:', tSlut - tStart, 'sekunder')
+    except:
+        print('Bubble Sort ikke implementeret. Springer over.')
 
-    print('Starter MergeSort')
-    tStart = time.time()
-    algo.mergeSort(case)
-    tSlut = time.time()
-    caseResults['MergeSort'] = tSlut - tStart
-    print('MergeSort:', tSlut - tStart, 'sekunder')
+    try:
+        print('Starter MergeSort')
+        tStart = time.time()
+        algo.mergeSort(case)
+        tSlut = time.time()
+        caseResults['MergeSort'] = tSlut - tStart
+        print('MergeSort:', tSlut - tStart, 'sekunder')
+    except:
+        print('insertionSort ikke implementeret. Springer over.')
 
     print('Starter Timsort')
     tStart = time.time()
@@ -49,19 +66,20 @@ def runTestCase(filename):
 
     return caseResults
 
-testResults = {}
-totalTimeStart = time.time()
-for run in range(10):
-    runResults = {}
-    runResults['Testcase 0'] = runTestCase('testcase0.txt')
-    runResults['Testcase 1'] = runTestCase('testcase1.txt')
-    runResults['Testcase 2'] = runTestCase('testcase2.txt')
-    runResults['Testcase 3'] = runTestCase('testcase3.txt')
-    runResults['Testcase 4'] = runTestCase('testcase4.txt')
-    testResults[run] = runResults
-totalTimeSlut = time.time()
-print('\n\nTotal tid: ', totalTimeSlut - totalTimeStart, 'sekunder')
+if __name__ == '__main__':
+    testResults = {}
+    totalTimeStart = time.time()
+    for run in range(10):
+        runResults = {}
+        runResults['Testcase 0'] = runTestCase('testcase0.txt')
+        runResults['Testcase 1'] = runTestCase('testcase1.txt')
+        runResults['Testcase 2'] = runTestCase('testcase2.txt')
+        runResults['Testcase 3'] = runTestCase('testcase3.txt')
+        runResults['Testcase 4'] = runTestCase('testcase4.txt')
+        testResults[run] = runResults
+    totalTimeSlut = time.time()
+    print('\n\nTotal tid: ', totalTimeSlut - totalTimeStart, 'sekunder')
 
-fil = open('testresults.txt', 'w')
-fil.write(json.dumps(testResults))
-fil.close()
+    fil = open('testresults.txt', 'w')
+    fil.write(json.dumps(testResults))
+    fil.close()
