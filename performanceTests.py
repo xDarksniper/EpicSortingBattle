@@ -15,7 +15,7 @@ def runTestCase(filename):
     except:
         print('Kunne ikke finde testfiler. Prøver at generere.')
         testDataGenerator.generate()
-        runTestCase()
+        run()
 
     try:
         print('Starter Select Sort')
@@ -66,7 +66,7 @@ def runTestCase(filename):
 
     return caseResults
 
-if __name__ == '__main__':
+def run():
     testResults = {}
     totalTimeStart = time.time()
     for run in range(10):
@@ -83,3 +83,6 @@ if __name__ == '__main__':
     fil = open('testresults.txt', 'w')
     fil.write(json.dumps(testResults))
     fil.close()
+
+if __name__ == '__main__':
+    run()
