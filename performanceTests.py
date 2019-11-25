@@ -55,7 +55,7 @@ def runTestCase(filename):
         caseResults['MergeSort'] = tSlut - tStart
         print('MergeSort:', tSlut - tStart, 'sekunder')
     except:
-        print('insertionSort ikke implementeret. Springer over.')
+        print('mergeSort ikke implementeret. Springer over.')
 
     print('Starter Timsort')
     tStart = time.time()
