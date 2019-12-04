@@ -44,17 +44,15 @@ def generateFewUniqueList(length):
     random.shuffle(out)
     return out
 
-def generate():
-    print('Genererer ca. 5 Mb testfiler')
-    makeFile(generateRandomList(1000), 'testcase0.txt')
-    print('I gang...')
-    makeFile(generateFewUniqueList(25000), 'testcase1.txt')
+def generate(sampleSize):
+    print('Genererer testfiler')
+    makeFile(generateFewUniqueList(sampleSize), 'few_unique.txt')
     print('Stadig i gang...')
-    makeFile(generateNearlySortedList(25000), 'testcase2.txt')
+    makeFile(generateNearlySortedList(sampleSize), 'nearly_sorted.txt')
     print('Det var halvdelen')
-    makeFile(generateReverseSortedList(25000), 'testcase3.txt')
+    makeFile(generateReverseSortedList(sampleSize), 'reverse.txt')
     print('Næsten...')
-    makeFile(generateRandomList(25000), 'testcase4.txt')
+    makeFile(generateRandomList(sampleSize), 'random.txt')
     print('Færdig! Check mappen "testfiles".')
 
 if __name__ == '__main__':
