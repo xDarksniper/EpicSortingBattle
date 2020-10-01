@@ -1,4 +1,4 @@
-import os, random, string
+import os, random, string, pprint
 
 def makeFile(list, filename):
     if not os.path.exists('./testfiles'):
@@ -16,28 +16,28 @@ def generateRandomString(length):
         out += random.choice(string.ascii_letters)
     return out
 
-def generateRandomList(length):
+def generateRandomList(length, chars=50):
     out = []
     while len(out) < length:
-        out.append(generateRandomString(50))
+        out.append(generateRandomString(chars))
     return out
 
-def generateNearlySortedList(length):
-    out = generateRandomList(length)
+def generateNearlySortedList(length, chars=50):
+    out = generateRandomList(length, chars)
     out.sort()
     offset = random.randint(1,10)
     for i in range(0, len(out)-offset, 5):
         out[i], out[i+offset] = out[i+offset], out[i]
     return out
 
-def generateReverseSortedList(length):
-    out = generateRandomList(length)
+def generateReverseSortedList(length, chars=50):
+    out = generateRandomList(length, chars)
     out.sort()
     out.reverse()
     return out
 
-def generateFewUniqueList(length):
-    temp = generateRandomList(length/10)
+def generateFewUniqueList(length, chars=50):
+    temp = generateRandomList(length/10, chars)
     out = []
     for i in range(10):
         out.extend(temp)
