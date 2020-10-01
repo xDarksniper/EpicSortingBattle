@@ -44,13 +44,10 @@ def generateFewUniqueList(length, chars=50):
     random.shuffle(out)
     return out
 
-def generate(sampleSize):
-    print('Genererer testfiler')
-    makeFile(generateFewUniqueList(sampleSize), 'few_unique.txt')
-    makeFile(generateNearlySortedList(sampleSize), 'nearly_sorted.txt')
-    makeFile(generateReverseSortedList(sampleSize), 'reverse.txt')
-    makeFile(generateRandomList(sampleSize), 'random.txt')
-    print('Færdig! Check mappen "testfiles".')
-
 if __name__ == '__main__':
-    generate()
+    # Generer en blandet liste af 10 tilfældige strings med længden 5
+    print(generateRandomList(10, 5))
+    # Generer en omvendt sorteret liste af 5 tilfældige strings med længden 10
+    print(generateReverseSortedList(5, 10))
+    # Generer en liste af få unikke 15 tilfældige strings med længden 3 og
+    print(generateFewUniqueList(15, 3))
