@@ -33,7 +33,7 @@ def runPerformaceTest(algoList):
     print('\nAfvikler performance tests')
     maxSample = 2500
     datapoints = 20
-    runs = 10
+    runs = 50
 
     testcases = {'Random': tg.generateRandomList,
     'Reverse Sorted': tg.generateReverseSortedList,
