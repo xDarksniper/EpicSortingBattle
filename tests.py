@@ -1,16 +1,17 @@
-import os, time, json, sys, math, matplotlib.pyplot as mpl, testDataGenerator as tg, unittest
+import os, time, json, sys, math, matplotlib.pyplot as mpl, testDataGenerator as tg
 from inspect import getmembers
 
-try:
-    import sorteringsAlgoritmer as algo
-except ModuleNotFoundError:
-    print('Fejl: Algoritmerne skal implementeres i en fil ved navn: sorteringsAlgoritmer.py\nTesten er afbrudt.')
-else:
-    print('Import lykkedes. Filen er navngivet korrekt.')
-    algoList = []
-    for function in getmembers(algo):
-        if 'sort' in function[0].lower():
-            algoList.append(function[1])
+def sortsCorrectly(case, algorithm):
+    sortedCase = case.copy()
+    sortedCase.sort()
+    return sortedCase == algorithm(case)
+
+def runFunctionTest(algoList):
+    for algo in algoList:
+        if sortsCorrectly(tg.generateNearlySortedList(10, 5), algo):
+            print(algo.__name__, 'sorterer korrekt')
+        else:
+            print(algo.__name__, 'har fejl i sorteringen')
 
 def runTestCase(case, algorithm):
     caseResults = {}
@@ -26,7 +27,7 @@ def runTestCase(case, algorithm):
         print('Fejl i funktionen.')
         print(x)
 
-def runPerformaceTest():
+def runPerformaceTest(algoList):
     print('\nAfvikler performance tests')
     maxSample = 2500
     datapoints = 20
@@ -43,7 +44,7 @@ def runPerformaceTest():
         for algorithm in algoList:
             testResults[case][algorithm.__name__] = {}
             step = int(maxSample/datapoints)
-            for sampleSize in range(1, maxSample+step, step):
+            for sampleSize in range(step, maxSample+step, step):
                 testResults[case][algorithm.__name__][sampleSize] = []
                 for run in range(runs):
                     toSort = testcases[case](sampleSize)
@@ -60,7 +61,6 @@ def runPerformaceTest():
     fil = open('Performance Test Results {}.txt'.format(datestring), 'w')
     fil.write(json.dumps(testResults))
     fil.close()
-
     return testResults
 
 def renderGraphs(data):
@@ -69,18 +69,18 @@ def renderGraphs(data):
     if not os.path.exists('./grafer'):
         os.mkdir('./grafer')
 
-    for case in data.keys():
-        mpl.copper()
-        for algorithm in data[case].keys():
-            mpl.plot(list(data[case][algorithm].keys()), list(data[case][algorithm].values()))
-        mpl.legend(data[case].keys())
-        mpl.grid(True)
-        mpl.title('Skaleringstest - {}'.format(case))
-        mpl.tick_params(axis='x', labelrotation=45, labelsize=6)
-        mpl.xlabel('Elementer i listen')
-        mpl.ylabel('Tid')
-        mpl.savefig('./grafer/{}.png'.format(case), dpi=300)
-        mpl.clf()
+        for case in data.keys():
+            mpl.copper()
+            for algorithm in data[case].keys():
+                mpl.plot(list(data[case][algorithm].keys()), list(data[case][algorithm].values()))
+            mpl.legend(data[case].keys())
+            mpl.grid(True)
+            mpl.title('Skaleringstest - {}'.format(case))
+            mpl.tick_params(axis='x', labelrotation=45, labelsize=6)
+            mpl.xlabel('Elementer i listen')
+            mpl.ylabel('Tid')
+            mpl.savefig('./grafer/{}.png'.format(case), dpi=300)
+            mpl.clf()
 
 def loadFromJson(filename):
     file = open(filename, 'r')
@@ -88,21 +88,18 @@ def loadFromJson(filename):
     file.close()
     return data
 
-class functionTest(unittest.TestCase):
-
-    def setUp(self):
-        self.case = tg.generateRandomList(100)
-        self.sortedCase = self.case.copy()
-        self.sortedCase.sort()
-
-    def testBogoSort(self):
-        self.assertTrue(hasattr(algo, 'bogoSort'))
-        self.assertEqual(algo.bogoSort(self.case), self.sortedCase)
-
-    def testPerformance(self):
-        data = runPerformaceTest()
-        renderGraphs(data)
-
 if __name__ == '__main__':
-    unittest.main()
-    #renderGraphs(loadFromJson('Performance Test Results 2019-12-06_14.05.30.txt'))
+    try:
+        import sorteringsAlgoritmer as algo
+    except ModuleNotFoundError:
+        print('Fejl: Algoritmerne skal implementeres i en fil ved navn: sorteringsAlgoritmer.py\nTesten er afbrudt.')
+    else:
+        foundAlgorithms = []
+        for function in getmembers(algo):
+            if 'Sort' in function[0]:
+                foundAlgorithms.append(function[1])
+
+        print('Kontrollerer at fundne algoritmer sorterer korrekt')
+        runFunctionTest(foundAlgorithms)
+        testdata = runPerformaceTest(foundAlgorithms)
+        renderGraphs(testdata)
