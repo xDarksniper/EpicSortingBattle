@@ -47,11 +47,8 @@ def generateFewUniqueList(length, chars=50):
 def generate(sampleSize):
     print('Genererer testfiler')
     makeFile(generateFewUniqueList(sampleSize), 'few_unique.txt')
-    print('Stadig i gang...')
     makeFile(generateNearlySortedList(sampleSize), 'nearly_sorted.txt')
-    print('Det var halvdelen')
     makeFile(generateReverseSortedList(sampleSize), 'reverse.txt')
-    print('Næsten...')
     makeFile(generateRandomList(sampleSize), 'random.txt')
     print('Færdig! Check mappen "testfiles".')
 
