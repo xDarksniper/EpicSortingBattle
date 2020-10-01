@@ -1,4 +1,6 @@
-import time, json, sys, testDataGenerator, sorteringsAlgoritmer as algo
+import time, json, sys, testDataGenerator, sorteringsAlgoritmer as algo, unittest
+
+# TODO: Tilføj skaleringsgraf (scalingTest.py) og test af korrekt sortering
 
 def importFile(filename):
     outList = []
@@ -14,7 +16,7 @@ def runTestCase(filename):
         case = importFile('./testfiles/' + filename)
     except:
         print('Kunne ikke finde testfiler. Prøver at generere.')
-        testDataGenerator.generate()
+        testDataGenerator.generate(2500)
         run()
 
     try:
@@ -24,8 +26,11 @@ def runTestCase(filename):
         tSlut = time.time()
         caseResults['Select Sort'] = tSlut - tStart
         print('Select Sort:', tSlut - tStart, 'sekunder')
-    except:
+    except AttributeError as x:
         print('SelectionSort ikke implementeret. Springer over.')
+    except Exception as x:
+        print('Fejl i funktionen.')
+        print(x)
 
     try:
         print('Starter Insert Sort')
@@ -55,7 +60,7 @@ def runTestCase(filename):
         caseResults['MergeSort'] = tSlut - tStart
         print('MergeSort:', tSlut - tStart, 'sekunder')
     except:
-        print('insertionSort ikke implementeret. Springer over.')
+        print('mergeSort ikke implementeret. Springer over.')
 
     print('Starter Timsort')
     tStart = time.time()
@@ -71,7 +76,6 @@ def run():
     totalTimeStart = time.time()
     for run in range(10):
         runResults = {}
-        runResults['Testcase 0'] = runTestCase('testcase0.txt')
         runResults['Testcase 1'] = runTestCase('testcase1.txt')
         runResults['Testcase 2'] = runTestCase('testcase2.txt')
         runResults['Testcase 3'] = runTestCase('testcase3.txt')
