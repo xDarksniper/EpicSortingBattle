@@ -12,6 +12,8 @@ def runFunctionTest(algoList):
             print(algo.__name__, 'sorterer korrekt')
         else:
             print(algo.__name__, 'har fejl i sorteringen')
+            algoList.remove(algo)
+    return algoList
 
 def runTestCase(case, algorithm):
     caseResults = {}
@@ -90,7 +92,7 @@ def loadFromJson(filename):
 
 if __name__ == '__main__':
     try:
-        import sorteringsAlgoritmer as algo
+        import sorteringsAlgoritmer_done as algo
     except ModuleNotFoundError:
         print('Fejl: Algoritmerne skal implementeres i en fil ved navn: sorteringsAlgoritmer.py\nTesten er afbrudt.')
     else:
@@ -100,6 +102,6 @@ if __name__ == '__main__':
                 foundAlgorithms.append(function[1])
 
         print('Kontrollerer at fundne algoritmer sorterer korrekt')
-        runFunctionTest(foundAlgorithms)
-        testdata = runPerformaceTest(foundAlgorithms)
-        renderGraphs(testdata)
+        functionalAlgorithms = runFunctionTest(foundAlgorithms)
+        #testdata = runPerformaceTest(functionalAlgorithms)
+        #renderGraphs(testdata)
