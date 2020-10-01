@@ -1,6 +1,8 @@
 # Genererede testdata, testresultater og diagrammer
 testfiles/
 grafer/
+*.txt
+*.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
