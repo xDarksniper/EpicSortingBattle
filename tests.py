@@ -103,5 +103,5 @@ if __name__ == '__main__':
 
         print('Kontrollerer at fundne algoritmer sorterer korrekt')
         functionalAlgorithms = runFunctionTest(foundAlgorithms)
-        #testdata = runPerformaceTest(functionalAlgorithms)
-        #renderGraphs(testdata)
+        testdata = runPerformaceTest(functionalAlgorithms)
+        renderGraphs(testdata)
