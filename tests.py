@@ -71,18 +71,18 @@ def renderGraphs(data):
     if not os.path.exists('./grafer'):
         os.mkdir('./grafer')
 
-        for case in data.keys():
-            mpl.copper()
-            for algorithm in data[case].keys():
-                mpl.plot(list(data[case][algorithm].keys()), list(data[case][algorithm].values()))
-            mpl.legend(data[case].keys())
-            mpl.grid(True)
-            mpl.title('Skaleringstest - {}'.format(case))
-            mpl.tick_params(axis='x', labelrotation=45, labelsize=6)
-            mpl.xlabel('Elementer i listen')
-            mpl.ylabel('Tid')
-            mpl.savefig('./grafer/{}.png'.format(case), dpi=300)
-            mpl.clf()
+    for case in data.keys():
+        mpl.copper()
+        for algorithm in data[case].keys():
+            mpl.plot(list(data[case][algorithm].keys()), list(data[case][algorithm].values()))
+        mpl.legend(data[case].keys())
+        mpl.grid(True)
+        mpl.title('Skaleringstest - {}'.format(case))
+        mpl.tick_params(axis='x', labelrotation=45, labelsize=6)
+        mpl.xlabel('Elementer i listen')
+        mpl.ylabel('Tid')
+        mpl.savefig('./grafer/{}.png'.format(case), dpi=300)
+        mpl.clf()
 
 def loadFromJson(filename):
     file = open(filename, 'r')
