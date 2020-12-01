@@ -23,16 +23,16 @@ def bogoSort(items):
 
 
 if __name__ == '__main__':
-    l = list(range(0, 7))
+    l = list(range(0, 5))
     lb = l.copy()
     for i in range(50):
         random.shuffle(lb)
         ## Kald den funktion, du vil teste
-        ls = bogoSort(l)
+        ls = mergeSort(l)
         ## Kald den funktion, du vil teste
         if ls != l:
             print('Fejl! Algoritmen kan ikke sortere.')
             break
     print('Succes! Algoritmen sorterer korrekt.')
-    print('blandet \t', lb)
-    print('sorteret\t', ls)
+    print('blandet: ', lb)
+    print('sorteret:', ls)
