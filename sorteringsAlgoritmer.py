@@ -1,4 +1,4 @@
-import random, math, sys
+import random, math, sys, copy
 
 def bogoSort(items):
     # Kopier den liste, vi har modtaget som parameter, så vi ikke ændrer den originale
@@ -8,7 +8,7 @@ def bogoSort(items):
     while not isSorted:
         attempts += 1
         if attempts > len(items) * 5000: # Check for at stoppe tendensen mod uendeligt
-            print('Afbryder på grund af for mange forsøg ({}) og bruger TimSort'.format(attempts))
+            print('Giver op på grund af for mange forsøg ({}) og bruger TimSort'.format(attempts))
             items.sort()
             return items
         random.shuffle(items) # Bland alle elementer helt tilfældigt
@@ -23,10 +23,16 @@ def bogoSort(items):
 
 
 if __name__ == '__main__':
-    for i in range(10):
-        listen = list(range(1, 8))
-        sorteret = bogoSort(listen)
-        random.shuffle(listen)
-        print('Shuffled:\t', listen)
-        print('Sorted:\t\t', sorteret)
-        print('==============================================================')
+    l = list(range(0, 7))
+    lb = l.copy()
+    for i in range(50):
+        random.shuffle(lb)
+        ## Kald den funktion, du vil teste
+        ls = bogoSort(l)
+        ## Kald den funktion, du vil teste
+        if ls != l:
+            print('Fejl! Algoritmen kan ikke sortere.')
+            break
+    print('Succes! Algoritmen sorterer korrekt.')
+    print('blandet \t', lb)
+    print('sorteret\t', ls)
