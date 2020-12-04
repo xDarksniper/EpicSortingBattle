@@ -1,4 +1,4 @@
-import random, math, sys, copy
+import random, copy
 
 def bogoSort(items):
     # Kopier den liste, vi har modtaget som parameter, så vi ikke ændrer den originale
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     for i in range(50):
         random.shuffle(lb)
         ## Kald den funktion, du vil teste
-        ls = mergeSort(l)
+        ls = bogoSort(l)
         ## Kald den funktion, du vil teste
         if ls != l:
             print('Fejl! Algoritmen kan ikke sortere.')
