@@ -32,7 +32,7 @@ def runTestCase(case, algorithm):
 def runPerformaceTest(algoList):
     print('\nAfvikler performance tests')
     maxSample = 2500
-    datapoints = 1
+    datapoints = 20
     runs = 1
 
     testcases = {'Random': tg.generateRandomList,
