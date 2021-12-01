@@ -93,7 +93,7 @@ def loadFromJson(filename):
 if __name__ == '__main__':
     separator = '-----------------------------------------------------------------'
     try:
-        import sorteringsAlgoritmer_done as algo
+        import sorteringsAlgoritmer as algo
     except ModuleNotFoundError:
         print('Fejl: Algoritmerne skal implementeres i en fil ved navn: sorteringsAlgoritmer.py\nTesten er afbrudt.')
     else:
