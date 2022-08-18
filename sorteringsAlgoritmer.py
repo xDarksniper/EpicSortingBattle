@@ -37,7 +37,13 @@ if __name__ == '__main__':
     print('blandet: ', lb)
     print('sorteret:', ls)
 
-
+def abubbleSort(array):
+    for o in enumerate(array):
+        for i in enumerate(array):
+                if array[i]>array[i+1]:
+                    temp = array[i+1]
+                    array[i+1] = array[i]
+                    array[i] = temp
 
 
 def bubblesort(array):
@@ -64,3 +70,10 @@ array = [2,5,8,0,1,5,4]
 insertionsort(array)
 print("insertionsort")
 print(array)
+
+def insertionSort(arr):
+    for i in range(len(arr)):
+        while i>i+1:
+            array[i], array[i+1] = array[i+1], array[i]
+        while i>i-1:
+            array[i], array[i-1] = array[i-1], array[i]
