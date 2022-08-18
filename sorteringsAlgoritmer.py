@@ -48,4 +48,19 @@ def bubblesort(array):
 
 array = [2,5,8,0,1,5,4]
 bubblesort(array)
+print("bubblesort")
+print(array)
+
+def insertionsort(array):
+    for i in range(1, len(array)):
+        key = array[i]
+        l = i-1
+        while l >= 0 and key < array[l]:
+            array[l+1] = array[l]
+            l = l-1
+        array[l+1]= key
+
+array = [2,5,8,0,1,5,4]
+insertionsort(array)
+print("insertionsort")
 print(array)
