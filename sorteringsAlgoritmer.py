@@ -37,4 +37,10 @@ if __name__ == '__main__':
     print('blandet: ', lb)
     print('sorteret:', ls)
 
-
+def bubbleSort(array):
+    for o in enumerate(array):
+        for i in enumerate(array):
+                if array[i]>array[i+1]:
+                    temp = array[i+1]
+                    array[i+1] = array[i]
+                    array[i] = temp
