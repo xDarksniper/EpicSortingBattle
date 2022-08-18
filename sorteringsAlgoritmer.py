@@ -48,8 +48,8 @@ def bubbleSort(array):
 
 def bubblesort(array):
     for i in range(len(array)):
-        for j in range ((array)-1):
-            if array[j]>array[j+1]:
+        for j in range(len(array)-1):
+            if array[j] > array[j+1]:
                 array[j], array[j+1] = array[j+1], array[j]
 
 array = [2,5,8,0,1,5,4]
